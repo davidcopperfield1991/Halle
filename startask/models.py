@@ -1,5 +1,8 @@
+
+
 from django.db import models
-from datetime import date
+from datetime import date, datetime
+
 # Create your models here.
 
 STATUS_CHOICES = (
@@ -32,20 +35,48 @@ PROGRESS_CHOICES = (
     ("100%", "100%"),
 )
 
-class Stratask(models.Model):
+class Routines(models.Model):
     title = models.CharField(max_length=200)
-    date = models.DateField(blank=True, default=date.today)
-    star_expected = models.IntegerField(blank=True,null=True)
-    description = models.CharField(max_length=200 ,  blank=True,null=True)
-    routine = models.CharField(max_length=200 , blank=True,null=True)
-    status = models.CharField(max_length=9, choices= STATUS_CHOICES)
-    importance = models.IntegerField(blank=True,null=True , choices=IMPORTANCE_CHOICES)
-    progress = models.CharField(blank=True,null=True , choices=PROGRESS_CHOICES,max_length=200)
-    star = models.IntegerField(blank=True,null=True)
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name_plural = "Stratask"
-        verbose_name = "Stratask"
+        verbose_name_plural = "Routines"
+        verbose_name = "Routine"
+
+class Tasks(models.Model):
+    title = models.CharField(max_length=200)
+    date = models.DateField(blank=True, default=date.today)
+    star_expected = models.IntegerField(blank=True,null=True)
+    description = models.CharField(max_length=200 ,  blank=True,null=True)
+    routine = models.ForeignKey(Routines , blank=True, on_delete=models.CASCADE , null=True)
+    status = models.CharField(max_length=9, choices= STATUS_CHOICES)
+    importance = models.IntegerField(blank=True,null=True , choices=IMPORTANCE_CHOICES)
+    progress = models.CharField(blank=True,null=True , choices=PROGRESS_CHOICES,max_length=200)
+
+    def __str__(self):
+        return self.title
+
+    def __int__(self):
+        return self.id
+
+    class Meta:
+        verbose_name_plural = "Tasks"
+        verbose_name = "Task"
+
+
+class Stars(models.Model):
+    date = models.DateField(blank=True, default=date.today)
+    time = models.DateTimeField(default=datetime.now, blank=True)
+    task_id = models.ForeignKey(Tasks, blank=True, on_delete=models.CASCADE , null=True)
+    routine_name = models.ForeignKey(Routines , blank=True, on_delete=models.CASCADE , null=True)
+    star = models.IntegerField(blank=True,null=True,default=1)
+
+
+    def __str__(self):
+        return self.task_id
+
+    class Meta:
+        verbose_name_plural = "Stars"
+        verbose_name = "Star"

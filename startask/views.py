@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from startask.models import Stratask
+from startask.models import Tasks
 
 # Create your views here.
 
 
 def mainpage(request):
-    varaible = Stratask.objects.all()
+    varaible = Tasks.objects.all()
 
     # print(varaible)
     context ={ "tasks" : varaible}
@@ -13,6 +13,6 @@ def mainpage(request):
 
 
 def tasks(request):
-    varaible = Stratask.objects.all()
+    varaible = Tasks.objects.all()
     context = {"tasks": varaible}
     return render(request, "tasks.html", context=context)

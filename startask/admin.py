@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from startask.models import Stratask
+from startask.models import Tasks , Routines , Stars
 
 
 class TimeDetailAdmin(admin.ModelAdmin):
@@ -9,7 +9,9 @@ class TimeDetailAdmin(admin.ModelAdmin):
 
 
     class Meta:
-        model = Stratask
+        model = Tasks
 
 
-admin.site.register(Stratask)
+admin.site.register(Tasks )
+admin.site.register(Stars)
+admin.site.register( Routines)
