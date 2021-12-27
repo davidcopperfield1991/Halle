@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<style>
+    body {
+  font-family: 'Helvetica';
+}
+
+.b-emp-task-card {
+  display: block;
+  padding: 15px;
+  box-shadow: 0 0 15px #00000026;
+  transition: all 0.3s ease 0s;
+}
+.b-emp-task-card__title {
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.b-emp-task-card__title i.fa-clock-o {
+  color: red;
+}
+.b-emp-task-card__payments {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.b-emp-task-card__amount {
+  display: inline-block;
+  padding: 2px 5px;
+  background: #14ce4d;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 12px;
+}
+.b-emp-task-card__payment-status {
+  font-size: 12px;
+}
+.b-emp-task-card__payment-status i.fa-close {
+  color: red;
+}
+.b-emp-task-card__payment-status i.fa-check {
+  color: green;
+}
+.b-emp-task-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.b-emp-task-card__status {
+  font-size: 12px;
+}
+.b-emp-task-card__deadline {
+  font-size: 12px;
+}
+.b-emp-task-card__trello {
+  font-size: 12px;
+}
+
+
+.b-emp-task-board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.b-emp-task-board__item {
+  width: 30%;
+  min-width: 300px;
+  margin: 1.5%;
+}
+</style>
+
+
+
+
+
+<div class="b-emp-task-board">
+    {% for s in tasks %}
+  <div class="b-emp-task-board__item">
+    <div class="b-emp-task-card">
+      <div class="b-emp-task-card__title"><i class="fa fa-clock-o"></i>{{ s.title }}</div>
+      <div class="b-emp-task-card__payments">
+        <div class="b-emp-task-card__amount">
+            {{ s.star }} star
+         <a href="addstar={{ s.id }}" class="card-link"></a>
+
+
+        </div>
+        <div class="b-emp-task-card__payment-status"><i class="bi bi-star"></i></div>
+        <div class="b-emp-task-card__payment-status">progress :<i class="bi bi-star"></i></div>
+        <div class="b-emp-task-card__payment-status">status : <i class="fa fa-close"></i> {{ s.status }}</div>
+      </div>
+      <div class="b-emp-task-card__meta">
+        <div class="b-emp-task-card__status"><i class="fa fa-battery-half"></i> Expected star :{{ s.star_expected }}</div>
+        <div class="b-emp-task-card__deadline"><i class="fa fa-clock-o"></i> importance : {{ s.importance }}</div>
+        <div class="b-emp-task-card__deadline"><i class="fa fa-clock-o"></i> routine:{{ s.routine }}</div>
+        <div class="b-emp-task-card__trello">
+{#          <a href="https://trello.com/" target="_blank"><img src="https://cdn.worldvectorlogo.com/logos/trello.svg" alt="" width="15px"></a>#}
+        </div>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+
+</div>
