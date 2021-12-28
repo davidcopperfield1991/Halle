@@ -74,7 +74,7 @@ class Stars(models.Model):
     star = models.IntegerField(blank=True,null=True,default=1)
 
 
-    def __str__(self):
+    def __int__(self):
         return self.task_id
 
     class Meta:
